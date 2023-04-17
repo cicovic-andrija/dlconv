@@ -45,9 +45,6 @@ modified: '{{ .ModifiedTimeUTC }}'
 | Water min. temp. | {{ .WaterMinTemp }} C |
 | Visibility | {{ .WaterVisibility }} |
 | Drift | {{ .DriftDive }} |
-{{ if ne .Note "" }}
-> Note: {{ .Note }}
-{{ end }}
 {{ end }}
 
 #### Note
@@ -91,7 +88,6 @@ type DiveData struct {
 	WaterMinTemp      string
 	WaterVisibility   string
 	DriftDive         string
-	Note              string
 }
 
 // Convert dive data in CSV to Markdown.
@@ -153,7 +149,6 @@ func main() {
 				WaterMinTemp:      records[i+18][11],
 				WaterVisibility:   records[i+19][11],
 				DriftDive:         records[i+20][11],
-				Note:              records[i+22][1],
 			})
 
 			increment = 23
@@ -168,7 +163,7 @@ func main() {
 		panic(fmt.Errorf("failed to open output file %s for writing: %v", OutputFile, err))
 	}
 	data := &TemplateData{
-		Title:           "Dive log",
+		Title:           "Dive Log",
 		ModifiedTimeUTC: time.Now().UTC().Format(time.RFC3339),
 		Dives:           dives,
 	}
