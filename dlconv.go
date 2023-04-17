@@ -13,7 +13,7 @@ const (
 	TemplateName         = "dive-log"
 	OutputFile           = TemplateName + ".md"
 	TemplateMarkdownText = `---
-tags: [diving]
+tags: [diving, wip]
 title: {{ .Title }}
 created: '2023-04-16T20:36:59.779Z'
 modified: '{{ .ModifiedTimeUTC }}'
@@ -22,19 +22,15 @@ modified: '{{ .ModifiedTimeUTC }}'
 # {{ .Title }}
 
 {{ range .Dives }}
-### No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}
+### No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.
 
 | Parameter | Measurement |
 | --------- | ----------- |
 | In | {{ .Time }} |
 | Duration | {{ .Duration }} min |
-| Max. depth | {{ .MaxDepth }} m |
-| Avg. depth | {{ .AvgDepth }} m |
-| Tank pressure start | {{ .TankPressureStart }} bar |
-| Tank pressure end | {{ .TankPressureEnd }} bar |
-| Deco | {{ .DecompressionDive }} |
-| Gas | {{ .Gas }} |
-| O2 | {{ .O2 }} |
+| Max. depth / avg. depth | {{ .MaxDepth }} m / {{ .AvgDepth }} m |
+| Tank pressure | {{ .TankPressureStart }} bar - {{ .TankPressureEnd }} bar |
+| Gas - O2 - Deco | {{ .Gas }} - {{ .O2 }} % - {{ .DecompressionDive }} |
 | CNS | {{ .CNS }} |
 | Altitude | {{ .Altitude }} m |
 | From | {{ .From }} |
@@ -42,19 +38,19 @@ modified: '{{ .ModifiedTimeUTC }}'
 | Suit | {{ .SuitType }} {{ .SuitThickness }} mm |
 | Weights | {{ .Weights }} kg |
 | Tank | {{ .TankType }} {{ .TankVolume }} litres |
-| Computer | {{ .Computer }} |
-| P-Fact | {{ .DecoAlgPFact }} |
+| Computer (P-Fact) | {{ .Computer }} ({{ .DecoAlgPFact }}) |
 | Weather | {{ .Weather }} |
 | Air temp. | {{ .AirTemp }} C |
 | Water | {{ .WaterType }} |
 | Water min. temp. | {{ .WaterMinTemp }} C |
 | Visibility | {{ .WaterVisibility }} |
 | Drift | {{ .DriftDive }} |
-
+{{ if ne .Note "" }}
 > Note: {{ .Note }}
-
+{{ end }}
 {{ end }}
 
+#### Note
 > This document is auto-generated from the master dive log file using dlconv.
 `
 )
