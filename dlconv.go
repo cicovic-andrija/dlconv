@@ -13,7 +13,7 @@ const (
 	TemplateName         = "dive-log"
 	OutputFile           = TemplateName + ".md"
 	TemplateMarkdownText = `---
-tags: [diving, wip]
+tags: [diving]
 title: {{ .Title }}
 created: '2023-04-16T20:36:59.779Z'
 modified: '{{ .ModifiedTimeUTC }}'
@@ -21,34 +21,29 @@ modified: '{{ .ModifiedTimeUTC }}'
 
 # {{ .Title }}
 
+## Index
 {{ range .Dives }}
-### No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.
+{{ .Cardinal }}. [{{ .Site }}, {{ .Date }}.](#no-{{ .Cardinal }}){{ end }}
 
-| Parameter | Measurement |
-| --------- | ----------- |
-| In | {{ .Time }} |
-| Duration | {{ .Duration }} min |
-| Max. depth / avg. depth | {{ .MaxDepth }} m / {{ .AvgDepth }} m |
-| Tank pressure | {{ .TankPressureStart }} bar - {{ .TankPressureEnd }} bar |
-| Gas - O2 - Deco | {{ .Gas }} - {{ .O2 }} % - {{ .DecompressionDive }} |
-| CNS | {{ .CNS }} |
-| Altitude | {{ .Altitude }} m |
-| From | {{ .From }} |
-| Operator | {{ .Operator }} |
-| Suit | {{ .SuitType }} {{ .SuitThickness }} mm |
-| Weights | {{ .Weights }} kg |
-| Tank | {{ .TankType }} {{ .TankVolume }} litres |
-| Computer (P-Fact) | {{ .Computer }} ({{ .DecoAlgPFact }}) |
-| Weather | {{ .Weather }} |
-| Air temp. | {{ .AirTemp }} C |
-| Water | {{ .WaterType }} |
-| Water min. temp. | {{ .WaterMinTemp }} C |
-| Visibility | {{ .WaterVisibility }} |
-| Drift | {{ .DriftDive }} |
+## Dive Data
+{{ range .Dives }}
+### <a id="no-{{ .Cardinal }}"></a>No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.
+
+| in | dur | xd | ad | tbar | gas | deco | cns | alt | from |
+| -- | --- | -- | -- | ---- | --- | ---- | --- | --- | ---- |
+| {{ .Time }} | {{ .Duration }}min | {{ .MaxDepth }}m | {{ .AvgDepth }}m | {{ .TankPressureStart }}bar - {{ .TankPressureEnd }}bar | {{ .Gas }} {{ .O2 }}% | {{ .DecompressionDive }} | {{ .CNS }}% | {{ .Altitude }}m | {{ .From }} |
+
+| oprt | suit | weights | tank | comp(p) |
+| ---- | ---- | ------- | ---- | ------- |
+| {{ .Operator }} | {{ .SuitType }}{{ if ne .SuitType "Dry suit" }} {{ .SuitThickness }}mm{{ end }} | {{ .Weights }}kg | {{ .TankType }} {{ .TankVolume }}litres | {{ .Computer }}{{ if ne .Computer "No" }} ({{ .DecoAlgPFact }}){{ end }} |
+
+| wcond | airt | wtr | wtrmt | vis | drift |
+| ----- | ---- | --- | ----- | --- | ----- |
+| {{ .Weather }} | {{ .AirTemp }}°C | {{ .WaterType }} | {{ .WaterMinTemp }}°C | {{ .WaterVisibility }} | {{ .DriftDive }} |
 {{ end }}
 
 #### Note
-> This document is auto-generated from the master dive log file using dlconv.
+> This document is auto-generated from the master dive log file using [dlconv](https://github.com/cicovic-andrija/dlconv).
 `
 )
 
