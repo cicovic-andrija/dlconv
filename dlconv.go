@@ -23,7 +23,7 @@ modified: '{{ .ModifiedTimeUTC }}'
 
 ## Index
 {{ range .Dives }}
-{{ .Cardinal }}. [{{ .Site }}, {{ .Date }}.](#no-{{ .Cardinal }}){{ end }}
+{{ .Cardinal }}. **[{{ .Site }}, {{ .Date }}.](#no-{{ .Cardinal }})**{{ end }}
 
 ## Dive Data
 {{ range .Dives }}
