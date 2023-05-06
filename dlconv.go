@@ -15,6 +15,7 @@ const (
 	TemplateMarkdownText = `---
 tags: [diving]
 title: {{ .Title }}
+subtitle: 'This document is auto-generated from the master dive log file using https://github.com/cicovic-andrija/dlconv.'
 created: '2023-04-16T20:36:59.779Z'
 modified: '{{ .ModifiedTimeUTC }}'
 ---
@@ -41,9 +42,6 @@ modified: '{{ .ModifiedTimeUTC }}'
 | ----- | ---- | --- | ----- | --- | ----- |
 | {{ .Weather }} | {{ .AirTemp }}°C | {{ .WaterType }} | {{ .WaterMinTemp }}°C | {{ .WaterVisibility }} | {{ .DriftDive }} |
 {{ end }}
-
-#### Note
-> This document is auto-generated from the master dive log file using [dlconv](https://github.com/cicovic-andrija/dlconv).
 `
 )
 
