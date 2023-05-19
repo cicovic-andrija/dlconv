@@ -13,7 +13,7 @@ const (
 	TemplateName         = "dive-log"
 	OutputFile           = TemplateName + ".md"
 	TemplateMarkdownText = `---
-tags: [diving]
+tags: [diving, my]
 title: {{ .Title }}
 comment: 'This document is auto-generated from the master dive log file using https://github.com/cicovic-andrija/dlconv.'
 created: '2023-04-16T20:36:59.779Z'
