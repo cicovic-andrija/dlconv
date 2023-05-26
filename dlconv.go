@@ -24,7 +24,7 @@ modified: '{{ .ModifiedTimeUTC }}'
 
 ## Index
 {{ range .Dives }}
-{{ .Cardinal }}. **[{{ .Site }}, {{ .Date }}.](#no-{{ .Cardinal }})**{{ end }}
+- **[No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.](#no-{{ .Cardinal }})**{{ end }}
 
 ## Dive Data
 {{ range .Dives }}
@@ -148,6 +148,10 @@ func main() {
 		}
 
 		i += increment
+	}
+
+	for i, j := 0, len(dives)-1; i < j; i, j = i+1, j-1 {
+		dives[i], dives[j] = dives[j], dives[i]
 	}
 
 	t := template.Must(template.New(TemplateName).Parse(TemplateMarkdownText))
