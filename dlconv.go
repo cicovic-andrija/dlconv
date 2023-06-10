@@ -30,7 +30,7 @@ modified: '{{ .ModifiedTimeUTC }}'
 {{ range .Dives }}
 ### <a id="no-{{ .Cardinal }}"></a>No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.
 
-| in | dur | xd | ad | tbar | gas | deco | cns | alt | from |
+| in | dur | xd | ad | tbar | gas | deco | cns | alt | entry |
 | -- | --- | -- | -- | ---- | --- | ---- | --- | --- | ---- |
 | {{ .Time }} | {{ .Duration }}min | {{ .MaxDepth }}m | {{ .AvgDepth }}m | {{ .TankPressureStart }}bar - {{ .TankPressureEnd }}bar | {{ .Gas }} {{ .O2 }}% | {{ .DecompressionDive }} | {{ .CNS }}% | {{ .Altitude }}m | {{ .From }} |
 
