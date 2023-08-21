@@ -30,17 +30,30 @@ modified: '{{ .ModifiedTimeUTC }}'
 {{ range .Dives }}
 ### <a id="no-{{ .Cardinal }}"></a>No. {{ .Cardinal }}: {{ .Site }}, {{ .Date }}.
 
-| in | dur | xd | ad | tbar | gas | deco | cns | alt | entry |
-| -- | --- | -- | -- | ---- | --- | ---- | --- | --- | ---- |
-| {{ .Time }} | {{ .Duration }}min | {{ .MaxDepth }}m | {{ .AvgDepth }}m | {{ .TankPressureStart }}bar - {{ .TankPressureEnd }}bar | {{ .Gas }} {{ .O2 }}% | {{ .DecompressionDive }} | {{ .CNS }}% | {{ .Altitude }}m | {{ .From }} |
+| Parameter | Value |
+| --------- | ----- |
+| Time in | {{ .Time }} |
+| Duration | {{ .Duration }} min |
+| Max. depth | {{ .MaxDepth }} m |
+| Avg. depth | {{ .AvgDepth }} m |
+| Tank pressure | {{ .TankPressureStart }} bar - {{ .TankPressureEnd }} bar |
+| Gas | {{ .Gas }} {{ .O2 }} % |
+| Decompression | {{ .DecompressionDive }} |
+| CNS | {{ .CNS }} % |
+| Altitude | {{ .Altitude }} m |
+| Entry | {{ .From }} |
+| Operator | {{ .Operator }} |
+| Suit | {{ .SuitType }}{{ if ne .SuitType "Dry suit" }} {{ .SuitThickness }} mm{{ end }} |
+| Weights | {{ .Weights }} kg |
+| Tank | {{ .TankType }} {{ .TankVolume }} litres |
+| Computer | {{ .Computer }} |
+| Weather | {{ .Weather }} |
+| Air temp. | {{ .AirTemp }} °C |
+| Water | {{ .WaterType }} |
+| Water temp. | {{ .WaterMinTemp }} °C |
+| Visibility | {{ .WaterVisibility }} |
+| Drift | {{ .DriftDive }} |
 
-| oprt | suit | weights | tank | comp(p) |
-| ---- | ---- | ------- | ---- | ------- |
-| {{ .Operator }} | {{ .SuitType }}{{ if ne .SuitType "Dry suit" }} {{ .SuitThickness }}mm{{ end }} | {{ .Weights }}kg | {{ .TankType }} {{ .TankVolume }}litres | {{ .Computer }}{{ if ne .Computer "No" }} ({{ .DecoAlgPFact }}){{ end }} |
-
-| wcond | airt | wtr | wtrmt | vis | drift |
-| ----- | ---- | --- | ----- | --- | ----- |
-| {{ .Weather }} | {{ .AirTemp }}°C | {{ .WaterType }} | {{ .WaterMinTemp }}°C | {{ .WaterVisibility }} | {{ .DriftDive }} |
 {{ end }}
 `
 )
