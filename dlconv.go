@@ -53,7 +53,6 @@ modified: '{{ .ModifiedTimeUTC }}'
 | Water temp. | {{ .WaterMinTemp }} °C |
 | Visibility | {{ .WaterVisibility }} |
 | Drift | {{ .DriftDive }} |
-
 {{ end }}
 `
 )
